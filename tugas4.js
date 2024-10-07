@@ -78,6 +78,20 @@ class Pelabuhan {
   }
 }
 
+// Subclass: PelabuhanKargo
+class PelabuhanKargo extends Pelabuhan {
+  infoPelabuhan() {
+    return `Pelabuhan Kargo ${this.nama} yang terletak di ${this.lokasi} khusus untuk pengiriman barang.`;
+  }
+}
+
+// Subclass: PelabuhanFerry
+class PelabuhanFerry extends Pelabuhan {
+  infoPelabuhan() {
+    return `Pelabuhan Ferry ${this.nama} yang terletak di ${this.lokasi} melayani transportasi penumpang.`;
+  }
+}
+
 // Kelas Induk: Rute
 class Rute {
   constructor(dari, ke) {
@@ -87,6 +101,20 @@ class Rute {
 
   infoRute() {
     return `Kapal Ferry dengan Rute dari ${this.dari} ke ${this.ke}.`;
+  }
+}
+
+// Subclass: RuteKargo
+class RuteKargo extends Rute {
+  infoRute() {
+    return `Rute Kargo dari ${this.dari} ke ${this.ke} untuk pengiriman barang.`;
+  }
+}
+
+// Subclass: RuteFerry
+class RuteFerry extends Rute {
+  infoRute() {
+    return `Rute Ferry dari ${this.dari} ke ${this.ke} untuk transportasi penumpang.`;
   }
 }
 
@@ -116,8 +144,8 @@ function tampilkanInfoRute(rute) {
 }
 
 // Membuat objek pelabuhan
-const pelabuhan1 = new Pelabuhan("Pelabuhan Ikan Salmon", "Jakarta");
-const pelabuhan2 = new Pelabuhan("Pelabuhan Ikan Tuna", "Surabaya");
+const pelabuhan1 = new PelabuhanFerry("Pelabuhan Ikan Salmon", "Jakarta");
+const pelabuhan2 = new PelabuhanKargo("Pelabuhan Ikan Tuna", "Surabaya");
 
 // Membuat objek kapal
 const kapal1 = new KapalPenumpang("Ferry", 100, 250, 300); // Kapasitas ditambahkan
@@ -131,14 +159,16 @@ const penumpang2 = new PenumpangAnak("Tommy", 10);
 const ikan1 = new IkanTuna("Tuna Biru");
 
 // Membuat objek rute
-const rute2 = new Rute("Surabaya", "Merak");
+const ruteFerry = new RuteFerry("Surabaya", "Merak");
+const ruteKargo = new RuteKargo("Jakarta", "Semarang");
 
 // Menggunakan fungsi dengan objek yang berbeda
 tampilkanInfoKapal(kapal1); // Kapal Penumpang Ferry yang berukuran 100 m x 250 m dan dapat menampung 300 penumpang.
 tampilkanInfoPenumpang(penumpang1); // Dewasa - Nama: Alice, Umur: 30
 tampilkanInfoPenumpang(penumpang2); // Anak - Nama: Tommy, Umur: 10
-tampilkanInfoRute(rute2); // Rute dari Surabaya ke Merak.
+tampilkanInfoRute(ruteFerry); // Rute Ferry dari Surabaya ke Merak untuk transportasi penumpang.
 tampilkanInfoKapal(kapal2); // Kapal Nelayan Budi dirancang untuk menangkap ikan.
 tampilkanInfoIkan(ikan1); // Kapal Nelayan menangkap ikan Tuna Tuna Biru.
-tampilkanInfoPelabuhan(pelabuhan1); // Pelabuhan Jakarta terletak di Jakarta.
-tampilkanInfoPelabuhan(pelabuhan2); // Pelabuhan Surabaya terletak di Surabaya.
+tampilkanInfoPelabuhan(pelabuhan1); // Pelabuhan Ferry Pelabuhan Ikan Salmon terletak di Jakarta.
+tampilkanInfoPelabuhan(pelabuhan2); // Pelabuhan Kargo Pelabuhan Ikan Tuna terletak di Surabaya.
+tampilkanInfoRute(ruteKargo); // Rute Kargo dari Jakarta ke Semarang untuk pengiriman barang.
